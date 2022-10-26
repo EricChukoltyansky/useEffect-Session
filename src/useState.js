@@ -227,32 +227,32 @@
 //   setState(currentState => currentState + newValue). This passes the current state at the scheduled update time to the callback function,
 //    making it possible to know the current state before attempting an update.
 
-import { useState } from "react";
+// import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0);
+// function App() {
+//   const [count, setCount] = useState(0);
 
-  // Directly update state
-  const update = () => setCount(count + 1);
+//   // Directly update state
+//   const update = () => setCount(count + 1);
 
-  // Directly update state after 3 sec
-  const asyncUpdate = () => {
-    setTimeout(() => {
-      setCount((currentCount) => currentCount + 1);
-    }, 2000);
-  };
+//   // Directly update state after 3 sec
+//   const asyncUpdate = () => {
+//     setTimeout(() => {
+//       setCount((currentCount) => currentCount + 1);
+//     }, 2000);
+//   };
 
-  // Render UI
-  return (
-    <div className="App">
-      <span>Count: {count}</span>
-      <button onClick={update}>Add +1</button>
-      <button onClick={asyncUpdate}>Add +1 later</button>
-    </div>
-  );
-}
+//   // Render UI
+//   return (
+//     <div className="App">
+//       <span>Count: {count}</span>
+//       <button onClick={update}>Add +1</button>
+//       <button onClick={asyncUpdate}>Add +1 later</button>
+//     </div>
+//   );
+// }
 
-export default App;
+// export default App;
 
 //*** 4.3 State vs reference ***//
 
@@ -371,3 +371,155 @@ export default App;
 // }
 
 // export default App;
+
+// *** 4.6 Updating Specific Object Property ***/
+
+// import { useState, useEffect } from "react";
+
+// export default function App() {
+//   const [user, setUser] = useState({
+//     name: "John",
+//     age: 25,
+//   });
+
+// Update property of user state
+//   const changeName = () => {
+//     setUser((user) => (user.name = "Mark"));
+//   };
+
+// Render UI
+//   return (
+//     <div className='App'>
+//       <p>User: {user.name}</p>
+//       <p>Age: {user.age}</p>
+
+//       <button onClick={changeName}>Change name</button>
+//     </div>
+//   );
+// }
+
+// However, the ideal and modern way of updating a specific property or an object or array is the use of the ES6 spread operator (...).
+//  It is the ideal way to update a specific property of an object or array when working with a state in functional components.
+//  With this spread operator, you can easily unpack the properties of an existing item into a new item and,
+//  at the same time, modify or add new properties to the unpacked item.
+
+// import { useState, useEffect } from "react";
+
+// export default function App() {
+//   const [user, setUser] = useState({
+//     name: "John",
+//     age: 25,
+//   });
+
+// Update property of user state using spread operator
+//   const changeName = () => {
+//     setUser((user) => ({ ...user, name: "Mark" }));
+//   };
+
+// Render UI
+//   return (
+//     <div className='App'>
+//       <p>User: {user.name}</p>
+//       <p>Age: {user.age}</p>
+
+//       <button onClick={changeName}>Change name</button>
+//     </div>
+//   );
+// }
+
+// *** 4.7 Managing Multiple Input Fields in Forms ***/
+
+// import { useState, useEffect } from "react";
+
+// export default function App() {
+//   const [firstName, setFirstName] = useState("");
+//   const [lastName, setLastName] = useState("");
+//   const [age, setAge] = useState("");
+//   const [userName, setUserName] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [email, setEmail] = useState("");
+
+//   const handleFirstName = (e) => {
+//     setFirstName(e.target.value);
+//   };
+
+//   const handleLastName = (e) => {
+//     setLastName(e.target.value);
+//   };
+
+// Render UI
+//   return (
+//     <div className="App">
+//       <form>
+//         <input
+//           type="text"
+//           placeholder="First Name"
+//           value={firstName}
+//           onChange={handleFirstName}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Last Name"
+//           value={lastName}
+//           onChange={handleLastName}
+//         />
+//         <input type="number" placeholder="Age" />
+//         <input type="text" placeholder="Username" />
+//         <input type="password" placeholder="Password" />
+//         <input type="email" placeholder="email" />
+//       </form>
+//     </div>
+//   );
+// }
+
+// Furthermore, you have to create a handler function for each of these inputs to establish a bidirectional flow of data that updates each state when
+//  an input value is entered. This can be rather redundant and time-consuming as it involves writing a lot of code that reduces
+//  the readability of your codebase.
+
+// However, it's possible to manage multiple input fields in a form using only one useState hook.
+//  This can be accomplished by first giving each input field a unique name and then creating one useState()
+//  function that is initialized with properties that bear identical names to those of the input fields.
+
+// import { useState, useEffect } from "react";
+
+// export default function App() {
+//   const [user, setUser] = useState({
+//     firstName: "",
+//     lastName: "",
+//     age: "",
+//     username: "",
+//     password: "",
+//     email: "",
+//   });
+
+// Update specific input field
+//  const handleChange = (e) =>
+//  setUser(prevState => ({...prevState, [e.target.name]: e.target.value}))
+
+// Render UI
+//   return (
+//     <div className='App'>
+//       <form>
+//         <input type='text' name='firstName' placeholder='First Name' />
+//         <input type='text' name='lastName' placeholder='Last Name' />
+//         <input type='number' name='age' placeholder='Age' />
+//         <input type='text' name='username' placeholder='Username' />
+//         <input type='password' name='password' placeholder='Password' />
+//         <input type='email' name='email' placeholder='email' />
+//       </form>
+//     </div>
+//   );
+// }
+
+// After which, we create a handler event function that updates the specific property of the user object to reflect changes in the form whenever a user types in something.
+//  This can be accomplished using the spread operator and dynamically accessing the name of the specific input element that fired the handler
+//  function using the event.target.elementsName = event.target.value.
+
+// In other words, we check the event object that is usually passed to an event function for the target elements name
+//  (which is the same as the property name in the user state) and update it with the associated value in that target element.
+
+// With this implementation, the event handler function is fired for each user input.
+//  In this event function, we have a setUser() state function that accepts the previous/current state of the user and unpacks
+// this user state using the spread operator. Then we check the event object for whatever target element name that fired the function
+// (which correlates to the property name in the state).
+//  Once this property name is gotten, we modify it to reflect the user input value in the form.
