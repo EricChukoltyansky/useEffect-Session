@@ -1,17 +1,25 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useFetch } from "./useFetch";
-import { useEffect2 } from "./useEffect2";
+import { useState } from "/useState.js";
 
 function App() {
-  console.log("App - Rendered");
+  const [count, setCount] = useState(0);
 
-  const { data } = useFetch({ url: "/Eric.json" });
+  // Directly update state
+  const update = () => setCount(count + 1);
 
+  // Directly update state after 3 sec
+  const asyncUpdate = () => {
+    setTimeout(() => {
+      setCount((currentCount) => currentCount + 1);
+    }, 2000);
+  };
+
+  // Render UI
   return (
     <div className="App">
-      <div>Hello</div>
-      <div>{JSON.stringify(data)}</div>
+      <span>Count: {count}</span>
+      <button onClick={update}>Add +1</button>
+      <button onClick={asyncUpdate}>Add +1 later</button>
     </div>
   );
 }
