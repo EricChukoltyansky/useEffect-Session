@@ -523,3 +523,72 @@
 // this user state using the spread operator. Then we check the event object for whatever target element name that fired the function
 // (which correlates to the property name in the state).
 //  Once this property name is gotten, we modify it to reflect the user input value in the form.
+
+// *** 4.8 Using the Obsolete State ***/
+
+// import { useState } from "react";
+
+// function Counter({ onSuccess }) {
+//   const [count, setCount] = useState(0);
+//   console.log(count);
+
+//   const increaseCount = () => {
+//     setCount(count + 1);
+//     setCount(count + 1);
+//     setCount(count + 1);
+//   };
+
+//   return (
+//     <>
+//       <button onClick={increaseCount}>Increase</button>
+//       <div>Counter: {count}</div>
+//     </>
+//   );
+// }
+
+// export default function IndexPage() {
+//   return (
+//     <div>
+//       <Counter />
+//     </div>
+//   );
+// }
+
+// In the above example, the Counter component increments the value of the state variable count.
+//  Since increaseCount() function calls the setCount() function 3 times, you might think that one button click will increase the count value by 3.
+//  But, it will only increment by 1 per button click.
+
+// The initial call to setCount(count + 1) increase the count appropriately, as count + 1 = 0 + 1 = 1.
+//  Similarly, the subsequent two calls of setCount(count + 1) too set the count to 1 since it uses an obsolete state of the count.
+
+// This happens because the value of the state will only be updated in the next render.
+
+// This obsolete state issue can be resolved by updating the state in a functional approach:
+
+// import { useState } from "react";
+
+// function Counter({ onSuccess }) {
+//   const [count, setCount] = useState(0);
+//   console.log(count);
+
+//   const increaseCount = () => {
+//     setCount(count => count + 1);
+//     setCount(count => count + 1);
+//     setCount(count => count + 1);
+//   };
+
+//   return (
+//     <>
+//       <button onClick={increaseCount}>Increase</button>
+//       <div>Counter: {count}</div>
+//     </>
+//   );
+// }
+
+// export default function IndexPage() {
+//   return (
+//     <div>
+//       <Counter />
+//     </div>
+//   );
+// }
