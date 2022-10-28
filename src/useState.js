@@ -1,35 +1,6 @@
-// import React, { useState } from "react";
 
-// A stateless functional component doesn't have a state. Here's an example:
 
-// function Bulbs() {
-//   return <div className="bulb-off" />;
-// }
-
-// What about adding a button to switch on/off the bulb?
-// To do so, you need a functional component with state, aka stateful functional component.
-
-// useState() is the right hook to implement the bulb switch state.
-// Adding state to a functional component requires 4 steps: enabling the state, initializing, reading and updating.
-
-//*** 1.1 Enabling state ***//
-
-// function Bulbs() {
-//     ... = useState(...);
-//     return <div className="bulb-off" />;
-//   }
-
-// useState() is called at the first line of Bulbs function
-// It's important that calling the hook inside the component makes it a stateful functional component
-
-//*** 1.2 Initializing state ***//
-
-// function Bulbs() {
-//     ... = useState(false);
-//     return <div className="bulb-off" />;
-// }
-
-//*** 1.3 Reading state ***//
+//*** 1.1 Reading state ***//
 
 // When the hook useState(initialState) is invoked, it returns an array.
 //  The first item of this array is the state value:
@@ -39,7 +10,7 @@
 // useState(false) returns an array. The first item contains the state value, which currently is false (because the state's been initialized with false).
 // Let's use array destructuring to extract the state value into a variable on:
 
-// function Bulbs() {
+// function App() {
 //   const [on] = useState(false);
 //   return <div className={on ? 'bulb-on' : 'bulb-off'} />;
 // }
@@ -233,17 +204,17 @@
 // function App() {
 //   const [count, setCount] = useState(0);
 
-//   // Directly update state
+  // Directly update state
 //   const update = () => setCount(count + 1);
 
-//   // Directly update state after 3 sec
+  // Directly update state after 3 sec
 //   const asyncUpdate = () => {
 //     setTimeout(() => {
 //       setCount((currentCount) => currentCount + 1);
 //     }, 2000);
 //   };
 
-//   // Render UI
+  // Render UI
 //   return (
 //     <div className="App">
 //       <span>Count: {count}</span>
@@ -625,3 +596,49 @@
 //     </div>
 //   );
 // }
+
+
+// const [serverRequest, setServerRequest] = useState({ ID: "", RAM: "", CPU: "", appInstaller: [{}] });
+
+// return (
+//   <div className="App">
+//     <label className="label">ID</label>
+//     <input
+//       className="input"
+//       type="text"
+//       name="ID"
+//       value={serverRequest?.ID}
+//       onChange={e =>
+//         setServerRequest({
+//           ...serverRequest,
+//           ID: e.target.value
+//         })
+//       }
+//     />
+//     <input
+//       className="input"
+//       type="text"
+//       name="RAM"
+//       value={serverRequest?.RAM}
+//       onChange={e =>
+//         setServerRequest({
+//           ...serverRequest,
+//           RAM: e.target.value
+//         })
+//       }
+//     />
+//   </div>
+// );
+
+// onChange={e =>
+//     setServerRequests(oldValue => {
+      // first spread value
+//       oldValue[selectedServer] = {
+//         ...oldValue[selectedServer],
+//         ID: e.target.value
+//       }
+  
+      // and now spread and return array
+//       return [...oldValue]
+//     })
+//   }
