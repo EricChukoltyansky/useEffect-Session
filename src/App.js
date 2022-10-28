@@ -1,17 +1,11 @@
-import "./App.css";
-import { useState, useEffect } from "/useState.js";
+import MouseContainer from "./Components/MouseContainer";
 
 const App = () => {
-  const [buttonName, setButtonName] = useState("posts");
-
   return (
     <>
       <div>
-        <button onClick={() => setButtonName("posts")}>Posts</button>
-        <button onClick={() => setButtonName("Users")}>Users</button>
-        <button onClick={() => setButtonName("Comments")}>Comments</button>
+        <MouseContainer />
       </div>
-      <h1>{buttonName}</h1>
     </>
   );
 };

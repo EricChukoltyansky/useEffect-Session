@@ -14,11 +14,25 @@ import { useEffect, useState } from "react";
 
 // However, you can control when the side-effects are performed.
 
-
 // import { useState, useEffect } from "/useState.js";
 
 // const App = () => {
-//   const [buttonName, setButtonName] = useState("posts")
+//   const [resourceType, setResourceType] = useState("posts");
+
+//   return (
+//     <>
+//       <div>
+//         <button onClick={() => setResourceType("posts")}>Posts</button>
+//         <button onClick={() => setResourceType("Users")}>Users</button>
+//         <button onClick={() => setResourceType("Comments")}>Comments</button>
+//       </div>
+//       <h1>{resourceType}</h1>
+//     </>
+//   );
+// };
+
+// export default App;
+
 
 // 1. The component renders for the first time.
 // 1.2 The useEffect() callback is executed.
@@ -32,26 +46,194 @@ import { useEffect, useState } from "react";
 // 2.1 useEffect() hook happens only when state changes and that changes dependencies.
 // 2.2 Click on the buttons to show that with every state change, the component renders again.
 // 2.3 Click on the same button twice to show that the useEffect() hook doesn't happen when there are no changes
+
+  // useEffect(()=>{
+//   console.log("useEffect - Rendereded - No Dependencies Array");
+// })
 // useEffect(()=>{
 //   console.log("useEffect - Rendered - With Parameter inside Dependency Array");
-// }, [buttonName])
+// }, [resourceType])
 
+// 3.1 So far, we've seen how to use useEffect() to perform side-effects.
+//  But what is the practical use of useEffect()?
+// 3.2 Let's say we want to fetch data from an API.
+// 3.3 We can use useEffect() to fetch data from an API.
+// 3.4 Show how the data is not fetched twice when the component renders twice.
+  // Because resourceType does not change between renders.
+// useEffect(()=> {
+  // fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
+  // .then(response => response.json())
+  // .then(json => console.log(json))
+// }, [resourceType])
+
+// 4.1 Let's put the info from the API into a state.
+// 4.2 Show how the data is not fetched twice when the component renders twice.
+//  Because resourceType does not change between renders.
+
+// import { useState, useEffect } from "/useState.js";
+
+// const App = () => {
+//   const [resourceType, setResourceType] = useState("posts");
+//   const [items, setItems] = useState([]);
+
+// useEffect(()=> {
+  // fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
+  // .then(response => response.json())
+  // .then(json => setItems(json))
+// }, [resourceType])
+
+//   return (
+//     <>
+//       <div>
+//         <button onClick={() => setResourceType("posts")}>Posts</button>
+//         <button onClick={() => setResourceType("Users")}>Users</button>
+//         <button onClick={() => setResourceType("Comments")}>Comments</button>
+//       </div>
+//       <h1>{resourceType}</h1>
+//       {items.map(item => {
+//         return <pre>{JSON.stringify(item)}</pre>
+//        })}
+//     </>
+//   );
+// };
+
+// export default App;
+
+// 5.1 This was a basic use of useEffect() hook.
+//  We can see how useEffect() helps us when dealing directly with the DOM by window size change.
+
+// import { useState, useEffect } from "/useState.js";
+
+// const App = () => {
+//   const [resourceType, setResourceType] = useState("posts");
+//   const [items, setItems] = useState([]);
+
+// useEffect(()=> {
+  // fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
+  // .then(response => response.json())
+  // .then(json => setItems(json))
+// }, [resourceType])
+
+//   return (
+//     <>
+//       <div>
+//         <button onClick={() => setResourceType("posts")}>Posts</button>
+//         <button onClick={() => setResourceType("Users")}>Users</button>
+//         <button onClick={() => setResourceType("Comments")}>Comments</button>
+//       </div>
+//       <h1>{resourceType}</h1>
+//       {items.map(item => {
+//         return <pre>{JSON.stringify(item)}</pre>
+//        })}
+//     </>
+//   );
+// };
+
+// export default App;
+
+// 6.1 Let's see how useEffect() can be used to with window size for example.
+// 6.2 Show how the window size changes when the component renders and when it cleans up.
+
+//***  First show it Static without useEffect() hook and then show it with useEffect() hook. ***/
+// import { useState, useEffect } from "/useState.js";
+
+// const App = () => {
+//   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+//   const handleResize = () => {
+//     setWindowWidth(window.innerWidth);
+// }
+
+// useEffect(()=> {
+  // window.addEventListener("resize", handleResize);
+
+  // return () => {
+    // window.removeEventListener("resize", handleResize);
+  // }
+// }, [])
+
+//   return (
+//     <>
+//       <div>
+//         {windowWidth}
+//       </div>
+//       
+//     </>
+//   );
+// };
+
+// export default App;
+
+// 7.1 Explain about the importance of useEffect() clean up function with return. 
+
+
+// import { useState, useEffect } from "/useState.js";
+
+// function MouseHook() {
+//   const [x, setX] = useState(0);
+//   const [y, setY] = useState(0);
+
+//   const logMousePosition = e => {
+//     console.log("Mouse event");
+//     setX(e.clientX);
+//     setY(e.clientY);
+// };
+
+// useEffect(() => {
+//   console.log("useEffect called");
+//   window.addEventListener("mousemove", logMousePosition);
+  
+
+// }, []);
+
+//   return (
+//     <div>
+//       Hooks X - {x} Y - {y}
+//     </div>
+//   );
+// }
+
+// function MouseContainer() {
+//   const [display, setDisplay] = useState(true);
+// return (
+//   <div>
+//     <button onClick={() => setDisplay(!display)}>Toggle Display</button>
+//     {display && <HookMouse />}
+//   </div>
+// )
+// }
+
+// const App = () => {
 
 
 
 //   return (
 //     <>
 //       <div>
-//         <button onClick={() => setButtonName("posts")}>Posts</button>
-//         <button onClick={() => setButtonName("Users")}>Users</button>
-//         <button onClick={() => setButtonName("Comments")}>Comments</button>
+//         <MouseContainer />
 //       </div>
-//       <h1>{buttonName}</h1>
+//       
 //     </>
 //   );
 // };
 
-// export default App;
+// To prevent memory leaks, we need to clean up the event listeners.
+
+//***Warning: Can't perform a React state update on an unmounted component.
+//*** This is a no-op, but it indicates a memory leak in your application. ***/
+//*** To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function. ***/
+//   return () => {
+//     console.log("Component unmounting code");
+//     window.removeEventListener("mousemove", logMousePosition);
+// }
+
+
+//**Remember to split everything into different Components and refresh after the useEffect!!!! **/
+
+
+
+
+
 
 function GreetBad({ name }) {
   const message = `Hello, ${name}!`; // Calculates output
