@@ -54,6 +54,7 @@
 //  after re-render `state` has the value of `newState`
 
 // import React, { useState } from 'react';
+// import './styles.css';
 // function Bulbs() {
 //   const [on, setOn] = useState(false);
 //   const lightOn = () => setOn(true);
@@ -427,6 +428,26 @@
 //   );
 // }
 
+// import { useState } from "react";
+
+// export default function App() {
+//   const [myArray, updateMyArray] = useState([]);
+
+//   const onClick = () => {
+//     updateMyArray((arr) => [...arr, `${arr.length}`]);
+//   };
+//   return (
+//     <>
+//       <input type="button" onClick={onClick} value="Update" />
+//       <div>
+//         {myArray.map((e) => (
+//           <div>{e}</div>
+//         ))}
+//       </div>
+//     </>
+//   );
+// }
+
 // *** 4.7 Managing Multiple Input Fields in Forms ***/
 
 // import { useState, useEffect } from "react";
@@ -447,10 +468,15 @@
 //     setLastName(e.target.value);
 //   };
 
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   console.log(firstName, lastName, age, userName, password, email);
+// }
+
 // Render UI
 //   return (
 //     <div className="App">
-//       <form>
+//       <form onSubmit={handleSubmit}>
 //         <input
 //           type="text"
 //           placeholder="First Name"
@@ -493,19 +519,26 @@
 //   });
 
 // Update specific input field
-//  const handleChange = (e) =>
+//  const handleChange = (e) => {
+// console.log([e.target.name]);
 //  setUser(prevState => ({...prevState, [e.target.name]: e.target.value}))
+// }
+
+// handleSubmit = (e) => {
+//   e.preventDefault();
+//   console.log(user);
+// }
 
 // Render UI
 //   return (
 //     <div className='App'>
-//       <form>
-//         <input type='text' name='firstName' placeholder='First Name' />
-//         <input type='text' name='lastName' placeholder='Last Name' />
-//         <input type='number' name='age' placeholder='Age' />
-//         <input type='text' name='username' placeholder='Username' />
-//         <input type='password' name='password' placeholder='Password' />
-//         <input type='email' name='email' placeholder='email' />
+//       <form onSubmit={handleSubmit}>
+//         <input type='text' name='firstName' placeholder='First Name' onChange={handleChange}/>
+//         <input type='text' name='lastName' placeholder='Last Name' onChange={handleChange}/>
+//         <input type='number' name='age' placeholder='Age' onChange={handleChange}/>
+//         <input type='text' name='username' placeholder='Username' onChange={handleChange}/>
+//         <input type='password' name='password' placeholder='Password' onChange={handleChange}/>
+//         <input type='email' name='email' placeholder='email' onChange={handleChange}/>
 //       </form>
 //     </div>
 //   );

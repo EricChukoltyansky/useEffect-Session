@@ -14,6 +14,45 @@ import { useEffect, useState } from "react";
 
 // However, you can control when the side-effects are performed.
 
+
+// import { useState, useEffect } from "/useState.js";
+
+// const App = () => {
+//   const [buttonName, setButtonName] = useState("posts")
+
+// 1. The component renders for the first time.
+// 1.2 The useEffect() callback is executed.
+// 1.3 Click on the buttons to show that with every state change, the component renders again.
+// 1.4 Explain that the useEffect() hook happens every time the component renders.
+// useEffect(()=>{
+//   console.log("useEffect - Rendered - No Dependencies Array");
+// })
+
+// 2. Add a dependency array to the useEffect() hook.
+// 2.1 useEffect() hook happens only when state changes and that changes dependencies.
+// 2.2 Click on the buttons to show that with every state change, the component renders again.
+// 2.3 Click on the same button twice to show that the useEffect() hook doesn't happen when there are no changes
+// useEffect(()=>{
+//   console.log("useEffect - Rendered - With Parameter inside Dependency Array");
+// }, [buttonName])
+
+
+
+
+//   return (
+//     <>
+//       <div>
+//         <button onClick={() => setButtonName("posts")}>Posts</button>
+//         <button onClick={() => setButtonName("Users")}>Users</button>
+//         <button onClick={() => setButtonName("Comments")}>Comments</button>
+//       </div>
+//       <h1>{buttonName}</h1>
+//     </>
+//   );
+// };
+
+// export default App;
+
 function GreetBad({ name }) {
   const message = `Hello, ${name}!`; // Calculates output
   // Bad!
@@ -68,7 +107,7 @@ function RepeatMessageNoCleanup({ message }) {
     setInterval(() => {
       console.log(message);
     }, 2000);
-  }, [message]);
+  }, []);
   return <div>I'm logging to console "{message}"</div>;
 }
 
