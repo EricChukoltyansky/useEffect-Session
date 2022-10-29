@@ -42,7 +42,7 @@
 //! 1.4 Explain that the useEffect() hook happens every time the component renders.
 
 // useEffect(()=>{
-//   console.log("useEffect - Rendered - No Dependencies Array");
+//   console.log("Renders on every render - No Dependencies");
 // })
 
 // ************************************************************************************************ //
@@ -54,6 +54,9 @@
 //   console.log("useEffect - Rendereded - No Dependencies Array");
 // })
 // useEffect(()=>{
+//   console.log("useEffect - Rendered - With Empty Dependency Array");
+// }, [])
+// useEffect(()=>{
 //   console.log("useEffect - Rendered - With Parameter inside Dependency Array");
 // }, [resourceType])
 
@@ -63,12 +66,6 @@
 // 3.3 We can use useEffect() to fetch data from an API.
 //! 3.4 Show how the data is not fetched twice when the component renders twice.
 //! Because resourceType does not change between renders.
-
-// useEffect(()=> {
-// fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
-// .then(response => response.json())
-// .then(json => console.log(json))
-// }, [resourceType])
 
 // 4.1 Let's put the info from the API into a state.
 // 4.2 Show how the data is not fetched twice when the component renders twice.
@@ -80,10 +77,23 @@
 //   const [resourceType, setResourceType] = useState("posts");
 //   const [items, setItems] = useState([]);
 
+
+// OPTION WITH PROMISE AND .THEN
+
 // useEffect(()=> {
 // fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
 // .then(response => response.json())
 // .then(json => setItems(json))
+// }, [resourceType])
+
+// OPTION WITH ASYNC AND AWAIT
+
+// useEffect(()=> {
+//   (async () => {
+//     const response = await fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
+//     const json = await response.json()
+//     setItems(json)
+// })()
 // }, [resourceType])
 
 //   return (
@@ -116,11 +126,7 @@
 // import { useState, useEffect } from "react";
 
 // const App = () => {
-//   const [windowWidth, setWindowWidth] = useState(window.innerWindow);
-
-//   const handleResize = () => {
-//     setWindowWidth(window.innerWidth)
-//   }
+//   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 //   return (
 //     <>
@@ -131,14 +137,17 @@
 
 // export default App;
 
-// import { useState, useEffect } from "/useState.js";
-
-// const App = () => {
-//   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+// ************************************************************************************************ //
 
 //   const handleResize = () => {
 //     setWindowWidth(window.innerWidth);
 // }
+
+// useEffect(()=> {
+// window.addEventListener("resize", handleResize);
+// }, [])
+
+// ************************************************************************************************ //
 
 // useEffect(()=> {
 // window.addEventListener("resize", handleResize);
@@ -147,20 +156,10 @@
 // window.removeEventListener("resize", handleResize);
 // }
 // }, [])
-
-//   return (
-//     <>
-//       <div>
-//         {windowWidth}
-//       </div>
-//
-//     </>
-//   );
-// };
-
-// export default App;
-
 // 7.1 Explain about the importance of useEffect() clean up function with return.
+
+// ************************************************************************************************ //
+
 //**!!!REMEMBER TO SPLIT EVERYTHINg INTO DIFFERENT COMOPNENTS AND REFRESH AFTER THE USEEFFECT!!! **/
 
 // import { useState, useEffect } from "/useState.js";
@@ -215,10 +214,14 @@
 //! This is a no-op, but it indicates a memory leak in your application. ***/
 //! To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function. ***/
 
+// ************************************************************************************************ //
+
 //   return () => {
 //     console.log("Component unmounting code");
 //     window.removeEventListener("mousemove", logMousePosition);
 // }
+
+// ************************************************************************************************ //
 
 //** 1. The infinite loop and side-effect updating state **//
 
@@ -268,6 +271,8 @@
 //   );
 // }
 
+//**************************************************************************************************/
+
 //** 2. The infinite loop and new objects references **//
 
 // import { useEffect, useState } from "react";
@@ -300,6 +305,13 @@
 //     setSecret(s => ({...s, countSecrets: s.countSecrets + 1}));
 //   }
 // }, [secret.value]);
+
+
+
+
+
+
+
 
 //!USE ONLY IN EXTREME CASES
 
