@@ -62,7 +62,7 @@
 // 3.2 Let's say we want to fetch data from an API.
 // 3.3 We can use useEffect() to fetch data from an API.
 //! 3.4 Show how the data is not fetched twice when the component renders twice.
- //! Because resourceType does not change between renders.
+//! Because resourceType does not change between renders.
 
 // useEffect(()=> {
 // fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
@@ -104,7 +104,9 @@
 // export default App;
 
 // 5.1 This was a basic use of useEffect() hook.
-//  We can see how useEffect() helps us when dealing directly with the DOM by window size change.
+//  We can see how useEffect() helps us when dealing with window size change.
+
+// ************************************************************************************************ //
 
 // 6.1 Let's see how useEffect() can be used to with window size for example.
 // 6.2 Show how the window size changes when the component renders and when it cleans up.
@@ -119,14 +121,6 @@
 //   const handleResize = () => {
 //     setWindowWidth(window.innerWidth)
 //   }
-
-//    useEffect(() => {
-//     handleResize()
-
-// return () => {
-//    window.removeEventListener("resize", handleResize)
-//  }
-//    },[]);
 
 //   return (
 //     <>
