@@ -11,7 +11,6 @@
 //         <>
 //             <div style={{ textAlign: "center" }}>
 //           <button>-</button>
-//           <button>0</button>
 //           <button>+</button>
 //             </div>
 //      </>
@@ -19,19 +18,6 @@
 // }
 
 // export default App;
-
-// ************************************************************************************************ //
-
-//! useState has to operated in the same order every time the component renders;
-//! it can't be called conditionally or inside loops, etc.
-//! useState can be called multiple times in a single component
-//! Show The Error In The Console!
-// if (true) {
-//     useState(0);
-// }
-// useState(0);
-// useState(0);
-// useState(0);
 
 // ************************************************************************************************ //
 
@@ -57,12 +43,27 @@
 
 // ************************************************************************************************ //
 
+//! useState has to operated in the same order every time the component renders;
+//! it can't be called conditionally or inside loops, etc.
+//! useState can be called multiple times in a single component
+//! Show The Error In The Console!
+// if (true) {
+//     useState(0);
+// }
+// useState(0);
+// useState(0);
+// useState(0);
+
+// ************************************************************************************************ //
+
 //! Build Decrement and Increment Functions To Demonstarte The Use Of setCount
 //! Explain That setCount(count-1) and setCount(count + 1) Is The Wrong Way To Do It
 
 // const decrement = () => {
 //     setCount(count - 1);
 // }
+
+// !Asynchronous Updates!// 
 
 // ************************************************************************************************ //
 
@@ -121,18 +122,13 @@
 //       })
 
 //!     BAD
-//  setStateArr([stateArr[0] - 1, stateArr[1]])
+//  setStateArr([stateArr[0] - 1])
 
 //!     GOOD
 //        setStateArr(prevState => {
 //            return [...prevState, prevState[0] - 1]
 // })
 // }
-
-// Toggle a boolean
-// const [toggled, setToggled] = useState(false);
-// setToggled(toggled => !toggled);
-
 //   function increment() {
 //     setStateObj(prevState => {
 //            return {...prevState, count: prevState.count + 1}
@@ -173,6 +169,10 @@
 // export default App;
 
 // ************************************************************************************************ //
+
+// Toggle a boolean
+// const [toggled, setToggled] = useState(false);
+// setToggled(toggled => !toggled);
 
 // function Bulbs() {
 //   const [on, setOn] = useState(false);

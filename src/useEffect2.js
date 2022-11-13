@@ -151,6 +151,7 @@
 
 // useEffect(()=> {
 // window.addEventListener("resize", handleResize);
+// }
 
 // return () => {
 // window.removeEventListener("resize", handleResize);
@@ -306,6 +307,31 @@
 //   }
 // }, [secret.value]);
 
+// import { useEffect, useState } from "react";
+// import "./App.css";
+
+// function App() {
+//   const [time, setTime] = useState(0);
+
+//   useEffect(() => {
+//     let interval = setInterval(() => setTime(() => 1), 1000);
+//     setTimeout(() => setTime(() => 0), 5000);
+
+//     return () => {
+//       clearInterval(interval);
+//     };
+//   }, [time]);
+
+//   return (
+//     <>
+//       <div>
+//         <div className={time && "box"}></div>
+//       </div>
+//     </>
+//   );
+// }
+
+// export default App;
 
 
 
@@ -313,7 +339,9 @@
 
 
 
-//!USE ONLY IN EXTREME CASES
+
+
+//****************************!USE ONLY IN EXTREME CASES**********************************//
 
 // function GreetBad({ name }) {
 //   const message = `Hello, ${name}!`; // Calculates output
