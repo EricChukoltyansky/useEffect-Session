@@ -3,24 +3,22 @@ import "./App.css";
 import axios from "axios";
 
 const App = () => {
-  const [randomJoke, setJoke] = useState("");
+  const [joke, setJoke] = useState("");
   const [categories, setCategories] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  const handleRandomJoke = () => {
-    fetch("https://api.chucknorris.io/jokes/random")
-      .then((response) => response.json())
-      .then((data) => {
-        setJoke(data.value);
-      });
+  const getRandomJoke = async () => {
+    const response = await axios.get("https://api.chucknorris.io/jokes/random");
+    console.log(response);
+    setJoke(response.data.value);
   };
 
-  const onCategoriesSubmit = () => {
-    fetch("https://api.chucknorris.io/jokes/categories")
-      .then((response) => response.json())
-      .then((data) => {
-        setCategories(data);
-      });
+  const getCategories = async () => {
+    const response = await axios.get(
+      "https://api.chucknorris.io/jokes/categories"
+    );
+    console.log(response.data);
+    setCategories(response.data);
   };
 
   const getJokeFromCategories = (category) => {
@@ -38,43 +36,41 @@ const App = () => {
     //     fetch(`https://api.chucknorris.io/jokes/search?query=${searchQuery}`)
     //       .then((response) => response.json())
     //       .then((data) => {
+    //         console.log(data.result[0].value);
     //         setJoke(data.result[0].value);
     //       });
     //   }
     // };
     // onSearchSubmit();
 
-    if (searchInput) {
-      const debounce = setTimeout(() => {
-        fetch(`https://api.chucknorris.io/jokes/search?query=${searchInput}`)
-          .then((response) => response.json())
-          .then((data) => {
-            setJoke(data?.result[0]?.value);
-          });
-      }, 2000);
+    const debounce = setTimeout(() => {
+      fetch(`https://api.chucknorris.io/jokes/search?query=${searchInput}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.result[0].value);
+          setJoke(data.result[0].value);
+        });
+    }, 2000);
 
-      return () => {
-        clearTimeout(debounce);
-      };
-    }
+    return () => {
+      clearTimeout(debounce);
+    };
   }, [searchInput]);
 
   return (
-    <div className="App">
-      <button onClick={handleRandomJoke}>Get Random Joke</button>
-      <button onClick={onCategoriesSubmit}>Get Categories</button>
-      {categories.length > 0 &&
-        categories.map((category) => (
-          <div
-            key={category}
-            onClick={(e) => getJokeFromCategories(e.target.textContent)}
-            style={{ cursor: "pointer" }}
-          >
+    <div>
+      <h1>Chuck Norris Jokes</h1>
+      <button onClick={getRandomJoke}>Get Joke</button>
+      <button onClick={getCategories}>Get categories</button>
+      <h1>{joke}</h1>
+      <div>
+        {categories.map((category) => (
+          <div onClick={(e) => getJokeFromCategories(e.target.textContent)}>
             {category}
           </div>
         ))}
+      </div>
       <input onChange={(e) => setSearchInput(e.target.value)} />
-      {randomJoke ? <h1>{randomJoke}</h1> : <h1>Spinner</h1>}
     </div>
   );
 };
